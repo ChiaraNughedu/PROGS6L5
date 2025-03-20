@@ -1,0 +1,35 @@
+﻿@model RegisterViewModel
+
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="post" asp-controller="Account" asp-action="Register">
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Birth Date</label>
+                <input type="date" class="form-control" asp-for="BirthDate" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" asp-for="Email" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" asp-for="Password" placeholder="Password" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+</div>
