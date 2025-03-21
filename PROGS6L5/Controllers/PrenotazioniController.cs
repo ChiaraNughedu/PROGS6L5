@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PROGS6L5.Controllers
 {
-    [Authorize(Roles = "Admin,Staff")]
+    //[Authorize(Roles = "Amministratore,User")]
     public class PrenotazioniController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,10 +20,10 @@ namespace PROGS6L5.Controllers
             _context = context;
         }
 
-        // GET: Prenotazioni
+       
         public async Task<IActionResult> Index()
         {
-            // Carica Cliente e Camera associati
+            
             var prenotazioni = _context.Prenotazioni
                 .Include(p => p.Cliente)
                 .Include(p => p.Camera);
@@ -31,16 +31,15 @@ namespace PROGS6L5.Controllers
             return View(await prenotazioni.ToListAsync());
         }
 
-        // GET: Prenotazioni/Create
         public IActionResult Create()
         {
-            // Popoliamo le select per Cliente e Camera
-            ViewData["ClienteId"] = new SelectList(_context.Clienti, "ClienteId", "Email");  // Oppure "Nome"
-            ViewData["CameraId"] = new SelectList(_context.Camere, "CameraId", "Numero");   // Oppure "Tipo"
+            
+            ViewData["ClienteId"] = new SelectList(_context.Clienti, "ClienteId", "Email"); 
+            ViewData["CameraId"] = new SelectList(_context.Camere, "CameraId", "Numero");   
             return View();
         }
 
-        // POST: Prenotazioni/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Prenotazione prenotazione)
@@ -51,13 +50,13 @@ namespace PROGS6L5.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            // Se ModelState non è valido, ricarichiamo le select
+           
             ViewData["ClienteId"] = new SelectList(_context.Clienti, "ClienteId", "Email", prenotazione.ClienteId);
             ViewData["CameraId"] = new SelectList(_context.Camere, "CameraId", "Numero", prenotazione.CameraId);
             return View(prenotazione);
         }
 
-        // GET: Prenotazioni/Edit/5
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -70,7 +69,7 @@ namespace PROGS6L5.Controllers
             return View(prenotazione);
         }
 
-        // POST: Prenotazioni/Edit/5
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Prenotazione prenotazione)
@@ -93,13 +92,13 @@ namespace PROGS6L5.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // Se ModelState non è valido, ricarichiamo le select
+            
             ViewData["ClienteId"] = new SelectList(_context.Clienti, "ClienteId", "Email", prenotazione.ClienteId);
             ViewData["CameraId"] = new SelectList(_context.Camere, "CameraId", "Numero", prenotazione.CameraId);
             return View(prenotazione);
         }
 
-        // GET: Prenotazioni/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -114,7 +113,7 @@ namespace PROGS6L5.Controllers
             return View(prenotazione);
         }
 
-        // POST: Prenotazioni/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PROGS6L5.Models;
 
-namespace PROGS6L5.Models
+namespace PROGS6L5.ViewModels
 {
-    public class Cliente
+    public class ClienteViewModel
     {
-        [Key]
-        public int ClienteId { get; set; }
-
         [Required]
         [StringLength(50)]
         public string Nome { get; set; }
@@ -23,8 +19,5 @@ namespace PROGS6L5.Models
         [Required]
         [Phone]
         public string Telefono { get; set; }
-
-        
-        public ICollection<Prenotazione> Prenotazioni { get; set; }
     }
 }

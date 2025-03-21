@@ -24,9 +24,9 @@ namespace PROGS6L5.Models
         public DateTime DataFine { get; set; }
 
         [Required]
-        public string Stato { get; set; } // Esempio: "Confermata", "Cancellata", "In Attesa"
+        public string Stato { get; set; } 
 
-        // Navigational properties
+        
         [ForeignKey(nameof(ClienteId))]
         public Cliente Cliente { get; set; }
 

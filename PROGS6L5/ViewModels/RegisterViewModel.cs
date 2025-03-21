@@ -9,9 +9,18 @@ namespace PROGS6L5.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "First name is required")]
+        public required string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Last name is required")]
+        public required string LastName { get; set; }
+
+        [Required(ErrorMessage = "Date of birth is required")]
+        public required DateOnly BirthDate { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "La password deve essere di almeno {2} caratteri.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "La password deve essere di almeno 8 caratteri.", MinimumLength = 6)]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
@@ -21,6 +30,6 @@ namespace PROGS6L5.ViewModels
 
         [Required]
         [Display(Name = "Ruolo")]
-        public string Ruolo { get; set; } // "Admin" o "Staff"
+        public string Ruolo { get; set; } 
     }
 }

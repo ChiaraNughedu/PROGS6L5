@@ -12,10 +12,10 @@ namespace PROGS6L5.Models
         public string Surname { get; set; }
 
         [Required]
-        public DateTime? BirthDate { get; set; }
+        public DateOnly? BirthDate { get; set; }
 
         public ICollection<ApplicationUserRole> ApplicationUserRoles { get; set; }
 
-        //inserire Icollection del modello che si vuole collegare
+        
     }
 }

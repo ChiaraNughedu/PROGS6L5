@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PROGS6L5.Models;
 using PROGS6L5.Data;
+using PROGS6L5.ViewModels;
 
 namespace PROGS6L5.Controllers
 {
-    [Authorize(Roles = "Admin,Staff")] // Solo Admin e Staff possono accedere
+    //[Authorize(Roles = "Amministratore")]
     public class ClientiController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,17 +30,24 @@ namespace PROGS6L5.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Cliente cliente)
+        public async Task<IActionResult> Create(ClienteViewModel clienteViewModel)
         {
             if (ModelState.IsValid)
             {
+                var cliente = new Cliente
+                {
+                    Nome = clienteViewModel.Nome,
+                    Cognome = clienteViewModel.Cognome,
+                    Email = clienteViewModel.Email,
+                    Telefono = clienteViewModel.Telefono
+                };
+
                 _context.Clienti.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(clienteViewModel);
         }
-
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();

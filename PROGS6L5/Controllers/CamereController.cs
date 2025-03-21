@@ -5,10 +5,11 @@ using PROGS6L5.Models;
 using PROGS6L5.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using PROGS6L5.ViewModels;
 
 namespace PROGS6L5.Controllers
 {
-    [Authorize(Roles = "Admin,Staff")]
+   // [Authorize(Roles = "Amministratore")]
     public class CamereController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,34 +19,40 @@ namespace PROGS6L5.Controllers
             _context = context;
         }
 
-        // GET: Camere
         public async Task<IActionResult> Index()
         {
             var camere = await _context.Camere.ToListAsync();
             return View(camere);
         }
 
-        // GET: Camere/Create
+      
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Camere/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Camera camera)
+        public async Task<IActionResult> Create(CamereViewModel camereViewModel)
         {
             if (ModelState.IsValid)
             {
+                var camera = new Camera
+                {
+                   Numero = camereViewModel.Numero,
+                   Tipo = camereViewModel.Tipo,
+                   Prezzo = camereViewModel.Prezzo,
+                };
+
                 _context.Camere.Add(camera);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(camera);
+            return View(camereViewModel);
         }
 
-        // GET: Camere/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -56,7 +63,7 @@ namespace PROGS6L5.Controllers
             return View(camera);
         }
 
-        // POST: Camere/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Camera camera)
@@ -80,7 +87,7 @@ namespace PROGS6L5.Controllers
             return View(camera);
         }
 
-        // GET: Camere/Delete/5
+       
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -92,7 +99,7 @@ namespace PROGS6L5.Controllers
             return View(camera);
         }
 
-        // POST: Camere/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
