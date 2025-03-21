@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PROGS6L5.Models.Camera>
+
+@{
+    ViewData["Title"] = "Elenco Camere";
+}
+
+<h1>Elenco Camere</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuova Camera</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().Numero)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Tipo)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Prezzo)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Prezzo)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CameraId">Modifica</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CameraId">Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

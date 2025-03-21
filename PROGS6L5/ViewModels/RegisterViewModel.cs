@@ -1,29 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PROGS6L5.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email address")]
-        public required string Email { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
 
-        [Required(ErrorMessage = "First name is required")]
-        public required string FirstName { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "La password deve essere di almeno {2} caratteri.", MinimumLength = 6)]
+        public string Password { get; set; }
 
-        [Required(ErrorMessage = "Last name is required")]
-        public required string LastName { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Conferma password")]
+        [Compare("Password", ErrorMessage = "Le password non corrispondono.")]
+        public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Date of birth is required")]
-        public required DateOnly BirthDate { get; set; }
-
-        [Required(ErrorMessage = "Password is required")]
-        public required string Password { get; set; }
-
-        [Required(ErrorMessage = "Confirm password is required")]
-        [Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
-        public required string ConfirmPassword { get; set; }
-
-
+        [Required]
+        [Display(Name = "Ruolo")]
+        public string Ruolo { get; set; } // "Admin" o "Staff"
     }
 }

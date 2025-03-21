@@ -38,6 +38,14 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.SlidingExpiration = true;
+});
+
 builder.Services.AddAuthentication(
     options => {
         options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -47,7 +55,7 @@ builder.Services.AddAuthentication(
         options.LoginPath = "/Account/Login";
         options.AccessDeniedPath = "/Account/Login";
         options.Cookie.HttpOnly = true;
-        options.Cookie.Name = "EcommerceLiveEfCore";
+        options.Cookie.Name = "HotelCookie";
     });
 
 builder.Services.AddScoped<UserManager<ApplicationUser>>();

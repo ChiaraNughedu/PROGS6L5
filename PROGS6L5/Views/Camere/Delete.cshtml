@@ -1,0 +1,27 @@
+﻿@model PROGS6L5.Models.Camera
+
+@{
+    ViewData["Title"] = "Elimina Camera";
+}
+
+<h1>Elimina Camera</h1>
+
+<h3>Sei sicuro di voler eliminare questa camera?</h3>
+
+<div>
+    <h4>Camera</h4>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Numero)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Numero)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Tipo)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Tipo)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Prezzo)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Prezzo)</dd>
+    </dl>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="CameraId" />
+        <input type="submit" value="Elimina" class="btn btn-danger" /> |
+        <a asp-action="Index">Indietro</a>
+    </form>
+</div>

@@ -35,5 +35,10 @@ namespace PROGS6L5.Controllers
         {
             return View();
         }
+
+        public IActionResult AccessDenied() 
+        { 
+            return View();  
+        }
     }
 }

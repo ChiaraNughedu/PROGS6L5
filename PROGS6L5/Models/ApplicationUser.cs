@@ -12,7 +12,7 @@ namespace PROGS6L5.Models
         public string Surname { get; set; }
 
         [Required]
-        public DateOnly? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public ICollection<ApplicationUserRole> ApplicationUserRoles { get; set; }
 
