@@ -22,8 +22,10 @@
     </dl>
 
     <form asp-action="DeleteConfirmed" method="post">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="ClienteId" />
-        <input type="submit" value="Elimina" class="btn btn-danger" /> |
-        <a asp-action="Index">Indietro</a>
+        <input type="submit" value="Elimina" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Indietro</a>
     </form>
+
 </div>

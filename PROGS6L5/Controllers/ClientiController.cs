@@ -98,13 +98,17 @@ namespace PROGS6L5.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cliente = await _context.Clienti.FindAsync(id);
-            if (cliente != null)
+            if (cliente == null)
             {
-                _context.Clienti.Remove(cliente);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
+
+            _context.Clienti.Remove(cliente);
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool ClienteExists(int id)
         {
